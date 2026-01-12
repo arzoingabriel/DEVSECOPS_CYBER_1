@@ -1,0 +1,23 @@
+[
+ {
+  "RuleID": "private-key",
+  "Description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+  "StartLine": 1,
+  "EndLine": 5,
+  "StartColumn": 1,
+  "EndColumn": 34,
+  "Match": "-----BEGIN OPENSSH PRIVATE KEY-----\nb55TGGtffszaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACBSWBbAMNYGSUBB6Z6ZB56b8678syYYFBTUQKlX5GVdTzGP1Kst1JYFsAxA/wcmt0NQjJsImQd\nCx6hygatp76ralKp/JOyAAAAEmRhbmllbEBQQ1BEYW0OOLZWw5OQECAw==\n-----END OPENSSH PRIVATE KEY-----",
+  "Secret": "-----BEGIN OPENSSH PRIVATE KEY-----\nb55TGGtffszaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACBSWBbAMNYGSUBB6Z6ZB56b8678syYYFBTUQKlX5GVdTzGP1Kst1JYFsAxA/wcmt0NQjJsImQd\nCx6hygatp76ralKp/JOyAAAAEmRhbmllbEBQQ1BEYW0OOLZWw5OQECAw==\n-----END OPENSSH PRIVATE KEY-----",
+  "File": "private-node.pem",
+  "SymlinkFile": "",
+  "Commit": "8fb6ac30c1e4ab45860531f36841b7bfd815633f",
+  "Link": "https://github.com/arzoingabriel/DEVSECOPS_CYBER_1/blob/8fb6ac30c1e4ab45860531f36841b7bfd815633f/private-node.pem#L1-L5",
+  "Entropy": 5.353794,
+  "Author": "Daniween",
+  "Email": "soudry.daniel99@gmail.com",
+  "Date": "2025-11-04T10:35:41Z",
+  "Message": "first commit",
+  "Tags": [],
+  "Fingerprint": "8fb6ac30c1e4ab45860531f36841b7bfd815633f:private-node.pem:private-key:1"
+ }
+]

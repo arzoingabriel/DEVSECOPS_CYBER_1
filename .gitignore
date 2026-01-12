@@ -1,2 +1,14 @@
 node_modules
 dist
+
+# Secrets et clés
+*.pem
+*.pem.pub
+*.key
+*.env
+.env.local
+.env.*.local
+private-key*
+*private*
+secrets/
+*.secret
