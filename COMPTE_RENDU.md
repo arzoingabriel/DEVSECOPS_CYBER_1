@@ -34,7 +34,6 @@ npm ci
 
 **Résultat :**
 - 72 packages installés
-- ⚠️ 6 vulnérabilités de haute sévérité détectées automatiquement
 
 ---
 
@@ -43,7 +42,6 @@ npm ci
 **Fichiers créés :**
 - `.github/workflows/trivy-scan.yml` : Scanner de vulnérabilités
 - `.github/workflows/gitleaks.yml` : Détection de secrets
-- `.github/workflows/snyk-scan.yml` : Fichier vide (non utilisé)
 
 **Explication :**
 Les workflows GitHub Actions s'exécutent automatiquement à chaque push ou Pull Request. Ils permettent de détecter les problèmes de sécurité dès qu'on pousse du code.
@@ -54,7 +52,7 @@ Les workflows GitHub Actions s'exécutent automatiquement à chaque push ou Pull
 
 ## Étape 2 : Scans de sécurité
 
-### 2.1 Scan Trivy (avant corrections)
+### 2.1 Scan Trivy (avant corrections) => /evidences/trivy-scan-local.json
 
 **Action :**
 ```bash
@@ -66,29 +64,29 @@ Trivy scanne le projet pour détecter les vulnérabilités dans les dépendances
 
 **Résultats :**
 
-| Target | Type | Vulnérabilités | Secrets |
-|--------|------|----------------|---------|
-| package-lock.json | npm | 14 | - |
-| private-node.pem | text | - | 1 |
+| Target            | Type | Vulnérabilités | Secrets |
+|-------------------|------|----------------|---------|
+| package-lock.json |  npm |       14       |    -    |
+| private-node.pem  | text |        -       |    1    |
 
 **Détail des vulnérabilités npm :**
 
-| Package | CVE/Advisory | Sévérité | Version installée | Version corrigée |
-|---------|--------------|----------|-------------------|------------------|
-| lodash | CVE-2021-23337 | HIGH | 4.17.20 | 4.17.21 |
-| lodash | CVE-2020-28500 | MEDIUM | 4.17.20 | - |
-| node-forge | CVE-2022-24771 | HIGH | 0.10.0 | 1.3.0 |
-| node-forge | CVE-2022-24772 | HIGH | 0.10.0 | 1.3.0 |
-| node-forge | CVE-2025-12816 | HIGH | 0.10.0 | 1.3.2 |
-| node-forge | CVE-2025-66031 | HIGH | 0.10.0 | 1.3.2 |
-| node-forge | CVE-2022-0122 | MEDIUM | 0.10.0 | 1.0.0 |
-| node-forge | CVE-2022-24773 | MEDIUM | 0.10.0 | 1.3.0 |
-| node-forge | CVE-2025-66030 | MEDIUM | 0.10.0 | 1.3.2 |
-| node-forge | GHSA-5rrq-pxf6-6jx5 | LOW | 0.10.0 | 1.0.0 |
-| node-forge | GHSA-gf8q-jrpm-jvxq | LOW | 0.10.0 | - |
-| qs | CVE-2025-15284 | HIGH | 6.13.0 | 6.14.1 |
-| serialize-javascript | CVE-2020-7660 | HIGH | 2.1.0 | 3.1.0 |
-| serialize-javascript | CVE-2019-16769 | MEDIUM | 2.1.0 | 2.1.1 |
+| Package              | CVE/Advisory        | Sévérité | Version installée | Version corrigée |
+|----------------------|---------------------|----------|-------------------|------------------|
+| lodash               | CVE-2021-23337      | HIGH     | 4.17.20           | 4.17.21          |
+| lodash               | CVE-2020-28500      | MEDIUM   | 4.17.20           | -                |
+| node-forge           | CVE-2022-24771      | HIGH     | 0.10.0            | 1.3.0            |
+| node-forge           | CVE-2022-24772      | HIGH     | 0.10.0            | 1.3.0            |
+| node-forge           | CVE-2025-12816      | HIGH     | 0.10.0            | 1.3.2            |
+| node-forge           | CVE-2025-66031      | HIGH     | 0.10.0            | 1.3.2            |
+| node-forge           | CVE-2022-0122       | MEDIUM   | 0.10.0            | 1.0.0            |
+| node-forge           | CVE-2022-24773      | MEDIUM   | 0.10.0            | 1.3.0            |
+| node-forge           | CVE-2025-66030      | MEDIUM   | 0.10.0            | 1.3.2            |
+| node-forge           | GHSA-5rrq-pxf6-6jx5 | LOW      | 0.10.0            | 1.0.0            |
+| node-forge           | GHSA-gf8q-jrpm-jvxq | LOW      | 0.10.0            | -                |
+| qs                   | CVE-2025-15284      | HIGH     | 6.13.0            | 6.14.1           |
+| serialize-javascript | CVE-2020-7660       | HIGH     | 2.1.0             | 3.1.0            |
+| serialize-javascript | CVE-2019-16769      | MEDIUM   | 2.1.0             | 2.1.1            |
 
 **Résumé :**
 - **Total :** 14 vulnérabilités (7 HIGH, 5 MEDIUM, 2 LOW)
@@ -96,7 +94,7 @@ Trivy scanne le projet pour détecter les vulnérabilités dans les dépendances
 
 ---
 
-### 2.2 Scan Gitleaks (avant corrections)
+### 2.2 Scan Gitleaks (avant corrections) => /evidence/gitleaks-scan-local.json
 
 **Action :**
 ```bash
@@ -108,9 +106,9 @@ Gitleaks scanne tout l'historique Git pour détecter les secrets committés. Mê
 
 **Résultats :**
 
-| Type | Fichier | Commit | Sévérité |
-|------|---------|--------|----------|
-| Clé privée SSH | private-node.pem | 8fb6ac30c1e4ab45860531f36841b7bfd815633f | HIGH |
+| Type           |      Fichier     |                 Commit                   | Sévérité |
+|----------------|------------------|------------------------------------------|----------|
+| Clé privée SSH | private-node.pem | 8fb6ac30c1e4ab45860531f36841b7bfd815633f |   HIGH   |
 
 **Résultat :** ✅ 1 secret détecté dans l'historique Git
 
@@ -149,6 +147,9 @@ Erreur N13 => serialize-javascript CVE-2020-7660 : Injection de code arbitraire 
 Erreur N14 => serialize-javascript CVE-2019-16769 : XSS via caractères non sécurisés dans les expressions régulières sérialisées. Permet l'injection de code JavaScript. Détecté par : Trivy. Sa gravité = MEDIUM
 
 Erreur N15 => Clé privée SSH committée : Clé privée OpenSSH détectée dans le fichier `private-node.pem` et committée dans l'historique Git. Même si supprimée, elle reste dans l'historique Git. Détecté par : Trivy ET Gitleaks. Sa gravité = HIGH
+
+
+**J'ai trouvé ce site qui permet d'expliquer exactement chaque erreur : https://nvd.nist.gov/vuln/search#/nvd/home?resultType=records**
 
 ---
 
@@ -196,11 +197,11 @@ git rm --cached private-node.pem.pub
 
 **Modifications dans package.json :**
 
-| Package | Version avant | Version après | Raison |
-|---------|---------------|---------------|--------|
-| lodash | 4.17.20 | 4.17.21 | Corrige CVE-2021-23337 |
-| serialize-javascript | 2.1.0 | 3.1.0 | Corrige CVE-2020-7660 et CVE-2019-16769 |
-| node-forge | 0.10.0 | 1.3.2 | Corrige 9 vulnérabilités |
+|      Package         | Version avant | Version après |                  Raison                 |
+|----------------------|---------------|---------------|-----------------------------------------|
+|     lodash           |    4.17.20    |    4.17.21    |           Corrige CVE-2021-23337        |
+| serialize-javascript |     2.1.0     |     3.1.0     | Corrige CVE-2020-7660 et CVE-2019-16769 |
+|     node-forge       |    0.10.0     |     1.3.2     |       Corrige 9 vulnérabilités          |
 
 **Action :**
 ```bash
@@ -239,9 +240,9 @@ trivy fs . --format table --output evidence/trivy-scan-final.txt
 
 **Résultats :**
 
-| Target | Type | Vulnérabilités | Secrets |
-|--------|------|----------------|---------|
-| package-lock.json | npm | **0** ✅ | - |
+|      Target       | Type | Vulnérabilités | Secrets |
+|-------------------|------|----------------|---------|
+| package-lock.json | npm  |     **0**      |    -    |
 
 **Résultat :** ✅ **0 vulnérabilités détectées dans les dépendances**
 
@@ -256,13 +257,13 @@ gitleaks detect --source . --report-path evidence/gitleaks-scan-apres-correction
 
 **Résultats :**
 
-| Type | Fichier | Commit | Sévérité |
-|------|---------|--------|----------|
-| Clé privée SSH | private-node.pem | 8fb6ac30c1e4ab45860531f36841b7bfd815633f | HIGH |
+|      Type      |      Fichier     |               Commit                     | Sévérité |
+|----------------|------------------|------------------------------------------|----------|
+| Clé privée SSH | private-node.pem | 8fb6ac30c1e4ab45860531f36841b7bfd815633f |   HIGH   |
 
-**Explication :** Gitleaks détecte toujours le secret dans l'historique Git (normal, il reste dans les commits précédents). L'important est que le secret soit maintenant dans `.gitignore` et ne sera plus committé à l'avenir.
+**Explication :** Gitleaks détecte toujours le secret dans l'historique Git (il reste dans les commits précédents). L'important est que le secret soit maintenant dans `.gitignore` et ne sera plus committé à l'avenir, si on veut le faire disparaitre completement, il faudra supprimer l'historique Git.
 
-**Résultat :** ✅ Secret protégé pour l'avenir
+**Résultat :** ✅ Secret protégé pour l'avenir, mais il faudrait tout de meme le supprimer en supprimant l'historique Git
 
 ---
 
@@ -281,28 +282,27 @@ npm audit
 
 ### Corrections appliquées
 
-| Action | Statut |
-|--------|--------|
-| `.gitignore` mis à jour | ✅ |
-| Secret supprimé du suivi Git | ✅ |
-| lodash mis à jour (4.17.20 → 4.17.21) | ✅ |
-| serialize-javascript mis à jour (2.1.0 → 3.1.0) | ✅ |
-| node-forge mis à jour (0.10.0 → 1.3.2) | ✅ |
-| qs forcé vers 6.14.1 via overrides | ✅ |
+|                   Action                        | Statut |
+|-------------------------------------------------|--------|
+| `.gitignore` mis à jour                         |   ✅   |
+| Secret supprimé du suivi Git                    |   ✅   |
+| lodash mis à jour (4.17.20 → 4.17.21)           |   ✅   |
+| serialize-javascript mis à jour (2.1.0 → 3.1.0) |   ✅   |
+| node-forge mis à jour (0.10.0 → 1.3.2)          |   ✅   |
+| qs forcé vers 6.14.1 via overrides              |   ✅   |
 
 ### Vulnérabilités corrigées
 
-| Catégorie | Avant | Après |
-|-----------|-------|-------|
-| Vulnérabilités npm | 14 | **0** ✅ |
-| Secrets détectés | 1 | 1 (dans historique, protégé) ✅ |
+|      Catégorie     | Avant|            Après                 |
+|--------------------|------|----------------------------------|
+| Vulnérabilités npm |  14  |            **0** ✅              |
+| Secrets détectés   |   1  | 1 (dans historique, protégé) ✅  |
 
 ### Validation finale
 
-| Outil | Résultat |
-|-------|----------|
-| Trivy | 0 vulnérabilités ✅ |
-| npm audit | 0 vulnérabilités ✅ |
+|   Outil  |                 Résultat           |
+|----------|------------------------------------|
+|  Trivy   |        0 vulnérabilités ✅         |
 | Gitleaks | Secret protégé par `.gitignore` ✅ |
 
 ---
@@ -311,6 +311,3 @@ npm audit
 
 Toutes les vulnérabilités dans les dépendances ont été corrigées. Le secret a été supprimé du suivi Git et est maintenant protégé par `.gitignore`. Le projet est sécurisé et prêt pour la mise en production.
 
----
-
-*Dernière mise à jour : Toutes les corrections appliquées et validées*
